@@ -1,8 +1,15 @@
 package org.zhadaev.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "contact_type")
 public class ContactType {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String type;
 
     public long getId() {

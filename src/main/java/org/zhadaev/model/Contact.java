@@ -1,10 +1,23 @@
 package org.zhadaev.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "contacts")
 public class Contact {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "person_id")
     private Person person;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "contact_type_id")
     private ContactType contactType;
+
     private String number;
 
     public long getId() {
