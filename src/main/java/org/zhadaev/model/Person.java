@@ -68,8 +68,7 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return id == person.id &&
-                firstName.equals(person.firstName) &&
+        return firstName.equals(person.firstName) &&
                 lastName.equals(person.lastName) &&
                 Objects.equals(middleName, person.middleName) &&
                 Objects.equals(position, person.position);
@@ -77,7 +76,7 @@ public class Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, middleName, position);
+        return Objects.hash(firstName, lastName, middleName, position);
     }
 
     @Override

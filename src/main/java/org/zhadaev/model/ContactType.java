@@ -35,13 +35,12 @@ public class ContactType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactType that = (ContactType) o;
-        return id == that.id &&
-                type.equals(that.type);
+        return type.equals(that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type);
+        return Objects.hash(type);
     }
 
     @Override
