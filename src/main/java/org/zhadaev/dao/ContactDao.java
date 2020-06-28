@@ -43,7 +43,18 @@ public class ContactDao implements IContactDao {
     public void save(final Contact contact) {
         Session session = sf.openSession(); //открыть сессию
         Transaction tx1 = session.beginTransaction(); //начать транзакцию
-        session.save(contact); //сохранить контакт в БД
+
+        //проверка на существующие ContactType и Person
+        List<ContactType> contactTypes = (List<ContactType>) session.createQuery("From ContactType").list();
+        if (!contactTypes.isEmpty() && contactTypes.contains(contact.getContactType())) {
+            contact.setContactType(contactTypes.get(contactTypes.indexOf(contact.getContactType())));
+        }
+        List<Person> persons = (List<Person>) session.createQuery("From Person").list();
+        if (!persons.isEmpty() && persons.contains(contact.getPerson())) {
+            contact.setPerson(persons.get(persons.indexOf(contact.getPerson())));
+        }
+
+        session.persist(contact); //сохранить контакт в БД
         tx1.commit(); //выполнить транзакцию
         session.close(); //закрыть сессию
     }
@@ -52,6 +63,8 @@ public class ContactDao implements IContactDao {
     public void update(final Contact contact) {
         Session session = sf.openSession();
         Transaction tx1 = session.beginTransaction();
+        session.update(contact.getPerson());
+        session.update(contact.getContactType());
         session.update(contact);
         tx1.commit();
         session.close();
