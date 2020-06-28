@@ -18,8 +18,4 @@ public interface IContactDao {
 
     public void delete(final Contact contact); //удаление контакта из БД
 
-    public Person findPersonById(final long id); //поиск человека по id
-
-    public ContactType findContactTypeById(final long id); //поиск типа контакта по id
-
 }

@@ -66,20 +66,4 @@ public class ContactDao implements IContactDao {
         session.close();
     }
 
-    @Override
-    public Person findPersonById(final long id) {
-        Session session = sf.openSession();
-        Person person = session.get(Person.class, id);
-        session.close();
-        return person;
-    }
-
-    @Override
-    public ContactType findContactTypeById(final long id) {
-        Session session = sf.openSession();
-        ContactType contactType = session.get(ContactType.class, id);
-        session.close();
-        return contactType;
-    }
-
 }

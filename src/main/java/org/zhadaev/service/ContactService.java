@@ -37,14 +37,4 @@ public class ContactService implements IContactService {
         contactDao.delete(contact);
     }
 
-    @Override
-    public Person findPersonById(final long id) {
-        return contactDao.findPersonById(id);
-    }
-
-    @Override
-    public ContactType findContactTypeById(final long id) {
-        return contactDao.findContactTypeById(id);
-    }
-
 }
