@@ -10,14 +10,15 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id")
+    @OneToOne
+    @JoinColumn(name = "person_id", nullable=false)
     private Person person;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contact_type_id")
+    @OneToOne
+    @JoinColumn(name = "contact_type_id", nullable=false)
     private ContactType contactType;
 
+    @Column(name = "number", nullable=false)
     private String number;
 
     public long getId() {
