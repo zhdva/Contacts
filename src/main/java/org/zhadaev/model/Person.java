@@ -3,7 +3,7 @@ package org.zhadaev.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "person")
+@Table(name = "persons")
 public class Person {
 
     @Id
