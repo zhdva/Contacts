@@ -13,7 +13,15 @@ import java.util.List;
 public class ContactDao implements IContactDao {
 
     //фабрика сессий
-    private final SessionFactory sf = HibernateConfig.getSessionFactory();
+    private final SessionFactory sf;
+
+    public ContactDao() {
+        sf = HibernateConfig.getSessionFactory();
+    }
+
+    public ContactDao(final SessionFactory sessionFactory) {
+        this.sf = sessionFactory;
+    }
 
     @Override
     public Contact findById(final long id) { //
