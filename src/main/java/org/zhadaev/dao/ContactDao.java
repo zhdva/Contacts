@@ -63,8 +63,23 @@ public class ContactDao implements IContactDao {
     public void update(final Contact contact) {
         Session session = sf.openSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(contact.getPerson());
-        session.update(contact.getContactType());
+
+        List<ContactType> contactTypes = (List<ContactType>) session.createQuery("From ContactType").list();
+        if (!contactTypes.isEmpty() && contactTypes.contains(contact.getContactType())) {
+            contact.setContactType(contactTypes.get(contactTypes.indexOf(contact.getContactType())));
+        } else {
+            ContactType contactType = (ContactType) session.merge(contact.getContactType());
+            session.saveOrUpdate(contactType);
+        }
+
+        List<Person> persons = (List<Person>) session.createQuery("From Person").list();
+        if (!persons.isEmpty() && persons.contains(contact.getPerson())) {
+            contact.setPerson(persons.get(persons.indexOf(contact.getPerson())));
+        } else {
+            Person person = (Person) session.merge(contact.getPerson());
+            session.saveOrUpdate(person);
+        }
+
         session.update(contact);
         tx1.commit();
         session.close();

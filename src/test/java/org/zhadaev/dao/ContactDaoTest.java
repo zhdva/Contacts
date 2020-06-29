@@ -121,10 +121,15 @@ public class ContactDaoTest {
     public void testUpdate() {
         Contact expectedContact = contactDao.findById(1);
         expectedContact.getPerson().setPosition("Пилот");
-        System.out.println(expectedContact.getPerson());
         contactDao.update(expectedContact);
         expectedContact = contactDao.findById(1);
         Assert.assertNotEquals(expectedContact, actualContact1);
+
+        Contact expectedContact2 = contactDao.findById(2);
+        expectedContact2.getContactType().setType("Рабочий");
+        contactDao.update(expectedContact2);
+        expectedContact2 = contactDao.findById(2);
+        Assert.assertNotEquals(expectedContact2, actualContact2);
     }
 
     @Test
